@@ -6,7 +6,16 @@
         [(ngModel)]="encryptSource"
         class="crypt__text"></textarea>
     <div class="crypt__btn">
-      <button class="btn">Encrypt</button>
+      <input
+          type="number"
+          max="100"
+          min="1"
+          class="crypt__key"
+          [(ngModel)]="encryptKey"
+      >
+      <button
+          (click)="onEncrypt()"
+          class="btn">Encrypt</button>
     </div>
   </div>
   <div class="crypt">
@@ -15,7 +24,16 @@
         [(ngModel)]="decryptSource"
         class="crypt__text"></textarea>
     <div class="crypt__btn">
-      <button class="btn">Decrypt</button>
+      <input
+          type="number"
+          max="100"
+          min="1"
+          class="crypt__key"
+          [(ngModel)]="decryptKey"
+      >
+      <button
+          (click)="onDecrypt()"
+          class="btn">Decrypt</button>
     </div>
   </div>
 </div>

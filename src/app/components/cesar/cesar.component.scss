@@ -21,6 +21,16 @@
     outline: none;
     padding: 5px;
     max-width: 910px;
+    border: 1px solid #838383
+  }
+  &__key {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #838383;
+    margin-right: 30px;
+    outline: none;
+    font-size: 16px;
+    max-width: 65px;
   }
   &__btn {
     text-align: right;
