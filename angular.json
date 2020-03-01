@@ -1,14 +1,14 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "encryption": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "inlineTemplate": true,
-          "inlineStyle": true,
+          "inlineTemplate": false,
+          "inlineStyle": false,
           "style": "scss",
           "skipTests": true
         },
@@ -105,6 +105,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "encryption"
+    }
+  },
+  "defaultProject": "encryption",
+  "cli": {
+    "analytics": false
+  }
 }
