@@ -1,1 +1,12 @@
-<p>sidebar works!</p>
+<ul class="sidebar">
+  <li *ngFor="let item of links" class="sidebar__item">
+    <a
+        [routerLinkActiveOptions]="{exact: true}"
+        class="sidebar__link"
+        routerLinkActive="active"
+        [routerLink]="item.path">
+      {{ item.name }}
+    </a>
+  </li>
+</ul>
+

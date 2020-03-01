@@ -1,1 +1,21 @@
-<p>cesar works!</p>
+<div class="method">
+  <h3 class="title">{{ title }}</h3>
+  <div class="crypt">
+    <p class="crypt__title">Encrypt source</p>
+    <textarea
+        [(ngModel)]="encryptSource"
+        class="crypt__text"></textarea>
+    <div class="crypt__btn">
+      <button class="btn">Encrypt</button>
+    </div>
+  </div>
+  <div class="crypt">
+    <p class="crypt__title">Decrypt source</p>
+    <textarea
+        [(ngModel)]="decryptSource"
+        class="crypt__text"></textarea>
+    <div class="crypt__btn">
+      <button class="btn">Decrypt</button>
+    </div>
+  </div>
+</div>

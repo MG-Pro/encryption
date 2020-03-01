@@ -1,0 +1,28 @@
+.title {
+  margin-bottom: 30px;
+}
+
+.crypt {
+  margin-bottom: 30px;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  &__title {
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  &__text {
+    width: 100%;
+    min-height: 200px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    outline: none;
+    padding: 5px;
+    max-width: 910px;
+  }
+  &__btn {
+    text-align: right;
+  }
+}

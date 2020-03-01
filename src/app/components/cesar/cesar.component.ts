@@ -5,11 +5,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './cesar.component.html',
   styleUrls: ['./cesar.component.scss']
 })
-export class CesarComponent implements OnInit {
+export class CesarComponent {
+  title: string = 'Cesar\'s encryption method'
+  encryptSource: string
+  decryptSource: string
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
 }
