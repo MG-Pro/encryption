@@ -19,12 +19,11 @@ export class CesarComponent {
   }
 
   onEncrypt() {
-    const result = this.codeService.encrypt(this.encryptSource.trim(), this.encryptKey)
-    this.decryptSource = result
+    this.decryptSource = this.codeService.encrypt(this.encryptSource.trim(), this.encryptKey)
   }
 
   onDecrypt() {
-
+    this.encryptSource = this.codeService.decrypt(this.decryptSource.trim(), this.decryptKey)
   }
 
 }
