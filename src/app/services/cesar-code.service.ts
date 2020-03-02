@@ -14,6 +14,10 @@ export class CesarCodeService {
     const inputArray: string[] = inputString.split('')
     const abc: string[] = this.createAbc(inputArray)
 
+    if(key >= abc.length) {
+      key = key % abc.length + 1
+    }
+
     return inputArray.reduce((acc, sym) => {
       const index = abc.findIndex(abcSym => abcSym === sym)
       const shiftIndex = index + key * direction;

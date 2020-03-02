@@ -20,19 +20,32 @@
     margin-bottom: 20px;
     outline: none;
     padding: 5px;
-    max-width: 910px;
-    border: 1px solid #838383
+    resize: vertical;
+    max-height: 500px;
+    border: 1px solid #838383;
+  
   }
   &__key {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #838383;
-    margin-right: 30px;
     outline: none;
     font-size: 16px;
     max-width: 65px;
+    margin-left: 20px;
+  }
+  &__key-label {
+    margin-left: 20px;
   }
   &__btn {
     text-align: right;
+    
+    .btn {
+      margin-left: 20px;
+      outline: none;
+      &_reset {
+        background-color: #ff374e;
+      }
+    }
   }
 }

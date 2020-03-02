@@ -18,6 +18,16 @@ export class CesarComponent {
   constructor(private codeService: CesarCodeService) {
   }
 
+  onEncryptClean() {
+    this.encryptSource = ''
+    this.encryptKey = 1
+  }
+
+  onDecryptClean() {
+    this.decryptSource = ''
+    this.decryptKey = 1
+  }
+
   onEncrypt() {
     this.decryptSource = this.codeService.encrypt(this.encryptSource.trim(), this.encryptKey)
   }
