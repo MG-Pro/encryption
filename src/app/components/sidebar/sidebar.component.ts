@@ -15,7 +15,11 @@ export class SidebarComponent {
     {
       name: 'Cesar`s code',
       path: '/cesar'
-    }
+    },
+    {
+      name: 'Vizhener`s code',
+      path: '/vizhener'
+    },
   ]
   constructor() { }
 

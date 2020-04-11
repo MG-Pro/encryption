@@ -8,7 +8,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HomeComponent } from './components/home/home.component';
 import { CesarComponent } from './components/cesar/cesar.component';
 import { FooterComponent } from './components/footer/footer.component';
-import {FormsModule} from '@angular/forms'
+import {FormsModule} from '@angular/forms';
+import { VizhenerComponent } from './components/vizhener/vizhener.component';
+import { MethodViewComponent } from './components/method-view/method-view.component'
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import {FormsModule} from '@angular/forms'
     SidebarComponent,
     HomeComponent,
     CesarComponent,
-    FooterComponent
+    FooterComponent,
+    VizhenerComponent,
+    MethodViewComponent
   ],
   imports: [
     BrowserModule,
