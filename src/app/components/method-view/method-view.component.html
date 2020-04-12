@@ -6,14 +6,22 @@
         [(ngModel)]="encryptSource"
         class="crypt__text"></textarea>
     <div class="crypt__btn">
-      <span class="crypt__key-label">Key (1 - 100)</span>
+      <span class="crypt__key-label">{{keyTip}}</span>
       <input
+          *ngIf="keyType === 'num'; else keyStrEnc"
           type="number"
           max="100"
           min="1"
           class="crypt__key"
           [(ngModel)]="encryptKey"
       >
+      <ng-template #keyStrEnc>
+        <input
+            type="text"
+            class="crypt__key crypt__key_string"
+            [(ngModel)]="encryptString"
+        >
+      </ng-template>
       <button
           (click)="onEncryptClean()"
           class="btn btn_reset">Reset</button>
@@ -28,14 +36,22 @@
         [(ngModel)]="decryptSource"
         class="crypt__text"></textarea>
     <div class="crypt__btn">
-      <span class="crypt__key-label">Key (1 - 100)</span>
+      <span class="crypt__key-label">{{keyTip}}</span>
       <input
+          *ngIf="keyType === 'num'; else keyStrDec"
           type="number"
           max="100"
           min="1"
           class="crypt__key"
           [(ngModel)]="decryptKey"
       >
+      <ng-template #keyStrDec>
+        <input
+            type="text"
+            class="crypt__key crypt__key_string"
+            [(ngModel)]="decryptString"
+        >
+      </ng-template>
       <button
           (click)="onDecryptClean()"
           class="btn btn_reset">Reset</button>

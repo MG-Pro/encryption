@@ -1,10 +1,11 @@
 <div>
   <app-method-view
+      keyType="string"
       [title]="title"
       [encryptSource]="encryptSource"
       [decryptSource]="decryptSource"
-      [encryptKey]="encryptKey"
-      [decryptKey]="decryptKey"
+      [encryptString]="encryptString"
+      [decryptString]="decryptString"
       (encrypt)="onEncrypt($event)"
       (decrypt)="onDecrypt($event)"
       (encryptClean)="onEncryptClean()"

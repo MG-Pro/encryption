@@ -7,10 +7,15 @@ import {Component, EventEmitter, Input, Output} from '@angular/core'
 })
 export class MethodViewComponent {
   @Input() title: string
+  @Input() keyType: string = 'num'
+
   @Input() encryptSource: string
   @Input() decryptSource: string
   @Input() encryptKey: number
   @Input() decryptKey: number
+
+  @Input() encryptString: string
+  @Input() decryptString: string
 
   @Output() encrypt: EventEmitter<object> = new EventEmitter<object>()
   @Output() decrypt: EventEmitter<object> = new EventEmitter<object>()
@@ -18,31 +23,35 @@ export class MethodViewComponent {
   @Output() encryptClean: EventEmitter<boolean> = new EventEmitter<boolean>()
   @Output() decryptClean: EventEmitter<boolean> = new EventEmitter<boolean>()
 
-  constructor() {}
+  keyTip: string = this.keyType === 'string'
+    ? 'Key (1 - 100)'
+    : 'Key string'
 
   onEncryptClean() {
     this.encryptSource = ''
     this.encryptKey = 1
+    this.encryptString = ''
     this.encryptClean.emit(true)
   }
 
   onDecryptClean() {
     this.decryptSource = ''
     this.decryptKey = 1
+    this.decryptString = ''
     this.decryptClean.emit(true)
   }
 
   onEncrypt() {
     this.encrypt.emit({
       encryptSource: this.encryptSource.trim(),
-      encryptKey: this.encryptKey
+      encryptKey: this.keyType === 'num' ? this.encryptKey: this.encryptString
     })
   }
 
   onDecrypt() {
     this.decrypt.emit({
       decryptSource: this.decryptSource.trim(),
-      decryptKey: this.decryptKey
+      decryptKey: this.keyType === 'num' ? this.decryptKey : this.decryptString
     })
   }
 }

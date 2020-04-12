@@ -11,19 +11,19 @@ export class VizhenerComponent {
   encryptSource: string = 'Мама мыла раму'
   decryptSource: string
 
-  encryptKey: number = 1
-  decryptKey: number = 1
+  encryptString: string = 'паскаль'
+  decryptString: string = ''
 
   constructor(private codeService: VizhinerCodeService) {}
 
   onEncryptClean() {
     this.encryptSource = ''
-    this.encryptKey = 1
+    this.encryptString = ''
   }
 
   onDecryptClean() {
     this.decryptSource = ''
-    this.decryptKey = 1
+    this.decryptString = ''
   }
 
   onEncrypt(data) {
