@@ -9,13 +9,13 @@ export class MethodViewComponent {
   @Input() title: string
   @Input() keyType: string = 'num'
 
-  @Input() encryptSource: string
-  @Input() decryptSource: string
+  @Input() encryptSource: string = ''
+  @Input() decryptSource: string = ''
   @Input() encryptKey: number
   @Input() decryptKey: number
 
-  @Input() encryptString: string
-  @Input() decryptString: string
+  @Input() encryptString: string = ''
+  @Input() decryptString: string = ''
 
   @Output() encrypt: EventEmitter<object> = new EventEmitter<object>()
   @Output() decrypt: EventEmitter<object> = new EventEmitter<object>()

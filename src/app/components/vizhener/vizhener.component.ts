@@ -9,7 +9,7 @@ import {VizhinerCodeService} from '../../services/vizhiner-code.service'
 export class VizhenerComponent {
   title: string = 'Vizhener\'s encryption method'
   encryptSource: string = 'Мама мыла раму'
-  decryptSource: string
+  decryptSource: string = ''
 
   encryptString: string = 'паскаль'
   decryptString: string = ''
