@@ -42,16 +42,31 @@ export class MethodViewComponent {
   }
 
   onEncrypt() {
+    const encryptKey = this.keyType === 'num'
+      ? this.encryptKey
+      : this.encryptString
+
+    if(!encryptKey) {
+      return
+    }
+
     this.encrypt.emit({
       encryptSource: this.encryptSource.trim(),
-      encryptKey: this.keyType === 'num' ? this.encryptKey: this.encryptString
+      encryptKey
     })
   }
 
   onDecrypt() {
+    const decryptKey = this.keyType === 'num'
+      ? this.decryptKey
+      : this.decryptString
+    if(!decryptKey) {
+      return
+    }
+
     this.decrypt.emit({
       decryptSource: this.decryptSource.trim(),
-      decryptKey: this.keyType === 'num' ? this.decryptKey : this.decryptString
+      decryptKey
     })
   }
 }
