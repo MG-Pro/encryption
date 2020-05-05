@@ -10,7 +10,8 @@ import { CesarComponent } from './components/cesar/cesar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import {FormsModule} from '@angular/forms';
 import { VizhenerComponent } from './components/vizhener/vizhener.component';
-import { MethodViewComponent } from './components/method-view/method-view.component'
+import { MethodViewComponent } from './components/method-view/method-view.component';
+import { SteganographyComponent } from './components/steganography/steganography.component'
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MethodViewComponent } from './components/method-view/method-view.compon
     CesarComponent,
     FooterComponent,
     VizhenerComponent,
-    MethodViewComponent
+    MethodViewComponent,
+    SteganographyComponent
   ],
   imports: [
     BrowserModule,

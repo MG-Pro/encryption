@@ -20,9 +20,11 @@ export class SidebarComponent {
       name: 'Vizhener`s code',
       path: '/vizhener'
     },
+    {
+      name: 'Steganography LSB',
+      path: '/steganography'
+    },
   ]
   constructor() { }
-
-
 
 }
