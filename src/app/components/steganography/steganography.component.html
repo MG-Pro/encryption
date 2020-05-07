@@ -4,14 +4,29 @@
     <h2 class="form__field-title">Encode</h2>
     <label class="message">
       <span>Source message: </span>
-      <input type="text">
+      <input
+          [(ngModel)]="message"
+          (input)="messageInputHandler()"
+          type="text"
+      >
     </label>
     <label class="file">
-      <span>File: </span>
-      <input type="file">
+      <span>Source image: </span>
+      <input
+          (change)="fileUploadHandler($event)"
+          [disabled]="isUploadDisabled"
+          type="file"
+      >
     </label>
     <div class="result">
-      <a href="" class="link" download>Download Encoded picture</a>
+      <a
+          *ngIf="isCompleteEncoded"
+          href=""
+          class="link"
+          download
+      >
+        Download Encoded picture
+      </a>
     </div>
   </div>
   <div class="form__field">
@@ -21,9 +36,17 @@
       <input type="file">
     </label>
     <div class="result">
-      <a href="" class="link" download>Download message</a>
+      <a
+          *ngIf="isCompleteDecoded"
+          href=""
+          class="link"
+          download
+      >
+        Download message
+      </a>
     </div>
   </div>
 </div>
+<canvas #canvas id="canvas"></canvas>
 <p class="picture__title">Picture</p>
-<img src="" alt="" class="picture">
+<img [src]="image" alt="" class="picture">
