@@ -13,7 +13,7 @@
     <label class="file">
       <span>Source image: </span>
       <input
-          (change)="fileUploadHandler($event)"
+          (change)="encodeUploadHandler($event)"
           [disabled]="isUploadDisabled"
           type="file"
       >
@@ -21,7 +21,7 @@
     <div class="result">
       <a
           *ngIf="isCompleteEncoded"
-          href=""
+          [href]="image"
           class="link"
           download
       >
@@ -32,18 +32,19 @@
   <div class="form__field">
     <h2 class="form__field-title">Decode</h2>
     <label class="file">
-      <span>File: </span>
-      <input type="file">
+      <span>Image: </span>
+      <input
+          (change)="decodeUploadHandler($event)"
+          type="file">
     </label>
-    <div class="result">
-      <a
-          *ngIf="isCompleteDecoded"
-          href=""
-          class="link"
-          download
-      >
-        Download message
-      </a>
+    <div
+        *ngIf="isCompleteDecoded"
+        class="result">
+      <span>Decoded Message: </span>
+      <input
+          [ngModel]="decodedMessage"
+          readonly
+      />
     </div>
   </div>
 </div>
