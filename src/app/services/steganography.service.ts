@@ -7,7 +7,7 @@ export class SteganographyService {
   private canvas: HTMLCanvasElement
   private ctx: CanvasRenderingContext2D
 
-  public init(canvas: HTMLCanvasElement) {
+  public init(canvas: HTMLCanvasElement): void {
     this.ctx = canvas.getContext('2d')
     this.canvas = canvas
   }
@@ -70,7 +70,6 @@ export class SteganographyService {
               index++
             }
           } else {
-
             const firstPortion = +division.toString().split('.')[0]
 
             let indexK = 0
