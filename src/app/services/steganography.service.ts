@@ -12,27 +12,27 @@ export class SteganographyService {
     this.canvas = canvas
   }
 
-  public async encrypt(img: File, message: string) {
-    const messageView = this.getMessageView(message)
-    const imageView = await this.getImgView(img)
-    const imgData = this.writeBytes(messageView, imageView)
+  public async encrypt(img: File, message: string): Promise<string> {
+    const messageUint8Array = this.getMessageUint8Array(message)
+    const imageData = await this.getImgData(img)
+    const imgData = this.writeBytes(messageUint8Array, imageData)
     this.ctx.putImageData(imgData, 0, 0)
     return this.canvas.toDataURL()
   }
 
-  public async decrypt(img: File) {
-    const imageView = await this.getImgView(img)
+  public async decrypt(img: File): Promise<string> {
+    const imageView = await this.getImgData(img)
     const textData = this.readBytes(imageView)
-    const decoder = new TextDecoder()
+    const decoder = new TextDecoder('utf8')
     return decoder.decode(textData)
   }
 
-  private getMessageView(message: string): Uint8Array {
+  private getMessageUint8Array(message: string): Uint8Array {
     const encoder = new TextEncoder()
     return encoder.encode(message)
   }
 
-  private getImgView(img: File): Promise<any> {
+  private getImgData(fileImg: File): Promise<ImageData> {
     return new Promise<any>(done => {
       const fr = new FileReader()
       type EventReader = Event & { target: { result: string } }
@@ -40,19 +40,23 @@ export class SteganographyService {
         const img = new Image()
         img.src = e.target.result
         img.onload = () => {
+          const {width, height} = img
+          this.canvas.width = width
+          this.canvas.height = height
+          this.ctx.clearRect(0, 0, width, height);
           this.ctx.drawImage(img, 0, 0)
-          const clampedArray = this.ctx.getImageData(0, 0, this.canvas.height, this.canvas.width)
-          done(clampedArray)
+          const imageData = this.ctx.getImageData(0, 0, width, height)
+          done(imageData)
         }
       })
-      fr.readAsDataURL(img)
+      fr.readAsDataURL(fileImg)
     })
   }
 
-  private writeBytes(messageView, imageView) {
+  private writeBytes(messageUint8Array: Uint8Array, imageData: ImageData): ImageData {
     let index = 0
-    const copiedImageViewData =  Uint8ClampedArray.from(imageView.data)
-    const length = messageView.length
+    const copiedImageData = Uint8ClampedArray.from(imageData.data)
+    const length = messageUint8Array.length
 
     for (let i = 0; i < length; i++) {
       if (i == 0) {
@@ -62,7 +66,7 @@ export class SteganographyService {
           const division = secretLength / 255
           if (division % 1 === 0) {
             for (let k = 0; k < division; k++) {
-              copiedImageViewData[k] = 255
+              copiedImageData[k] = 255
               index++
             }
           } else {
@@ -71,22 +75,22 @@ export class SteganographyService {
 
             let indexK = 0
             for (let k = 0; k < firstPortion; k++) {
-              copiedImageViewData[k] = 255
+              copiedImageData[k] = 255
               index++
               indexK = k
             }
 
-            copiedImageViewData[indexK] = Math.round((division - firstPortion) * 255)
+            copiedImageData[indexK] = Math.round((division - firstPortion) * 255)
             index++
           }
 
         } else {
-          copiedImageViewData[0] = secretLength
+          copiedImageData[0] = secretLength
           index++
         }
       }
 
-      const asciiCode = messageView[i]
+      const asciiCode = messageUint8Array[i]
       const first2bit = (asciiCode & 0x03)
       const first4bitMiddle = (asciiCode & 0x0C) >> 2
       const first6bitMiddle = (asciiCode & 0x30) >> 4
@@ -97,46 +101,42 @@ export class SteganographyService {
       replaceByte(first6bitMiddle)
       replaceByte(first8bitMiddle)
 
-      function replaceByte(bits) {
-        copiedImageViewData[index] = (copiedImageViewData[index] & 0xFC) | bits
+      function replaceByte(bits: number) {
+        copiedImageData[index] = (copiedImageData[index] & 0xFC) | bits
         index++
       }
     }
 
-    return new ImageData(copiedImageViewData, imageView.width, imageView.height)
+    return new ImageData(copiedImageData, imageData.width, imageData.height)
   }
 
-  private readBytes(imageView) {
-
+  private readBytes(imageData: ImageData): Uint8Array {
     let totalLength = 0
     let lastIndex
-    const viewLength = imageView.data.length
-    for(let b = 0; b < viewLength; b++) {
-      if(imageView.data[b] == 255) {
-        totalLength += imageView.data[b]
-        if(imageView.data[b + 1] < 255) {
-          totalLength += imageView.data[b + 1]
-          lastIndex = b + 1
+
+    for(let i = 0; i < imageData.data.length; i++) {
+      if(imageData.data[i] == 255) {
+        totalLength += imageData.data[i]
+        if(imageData.data[i + 1] < 255) {
+          totalLength += imageData.data[i + 1]
+          lastIndex = i + 1
           break
         }
       } else {
-        totalLength += imageView.data[b]
-        lastIndex = b
+        totalLength += imageData.data[i]
+        lastIndex = i
         break
       }
     }
 
-    const secretLength = totalLength
-
     const newUint8Array = new Uint8Array(totalLength / 4)
     let j = 0
 
-    for(let i = (lastIndex + 1); i < secretLength; i = i + 4) {
-
-      const aShift = (imageView.data[i] & 3)
-      const bShift = (imageView.data[i + 1] & 3) << 2
-      const cShift = (imageView.data[i + 2] & 3) << 4
-      const dShift = (imageView.data[i + 3] & 3) << 6
+    for(let i = (lastIndex + 1); i < totalLength; i = i + 4) {
+      const aShift = (imageData.data[i] & 3)
+      const bShift = (imageData.data[i + 1] & 3) << 2
+      const cShift = (imageData.data[i + 2] & 3) << 4
+      const dShift = (imageData.data[i + 3] & 3) << 6
 
       newUint8Array[j] = (((aShift | bShift) | cShift) | dShift)
       j++

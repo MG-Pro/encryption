@@ -15,6 +15,7 @@
       <input
           (change)="encodeUploadHandler($event)"
           [disabled]="isUploadDisabled"
+          accept="image/jpeg,image/png"
           type="file"
       >
     </label>
@@ -35,6 +36,7 @@
       <span>Image: </span>
       <input
           (change)="decodeUploadHandler($event)"
+          accept="image/jpeg,image/png"
           type="file">
     </label>
     <div
@@ -48,6 +50,11 @@
     </div>
   </div>
 </div>
-<canvas #canvas id="canvas"></canvas>
+<canvas
+  #canvas
+  id="canvas"
+  width="800"
+  height="600">
+</canvas>
 <p class="picture__title">Picture</p>
 <img [src]="image" alt="" class="picture">
