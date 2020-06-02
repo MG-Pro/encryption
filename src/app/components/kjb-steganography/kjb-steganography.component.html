@@ -1,0 +1,106 @@
+<h3 class="title">Kutter-Jordan-Bossen steganography method</h3>
+<div class="form">
+  <div class="form__field">
+    <h2 class="form__field-title">Encode</h2>
+    <label class="key">
+      <span>Key (0-255): </span>
+      <div class="key-wrap">
+        <input
+            [(ngModel)]="encodeKeys[0]"
+            type="number"
+            min="0"
+            max="255"
+        >
+        <input
+            [(ngModel)]="encodeKeys[1]"
+            type="number"
+            min="0"
+            max="255"
+        >
+        <input
+            [(ngModel)]="encodeKeys[2]"
+            type="number"
+            min="0"
+            max="255"
+        >
+      </div>
+    </label>
+    <label class="message">
+      <span>Source message: </span>
+      <input
+          [(ngModel)]="message"
+          (input)="messageInputHandler()"
+          type="text"
+      >
+    </label>
+    <label class="file">
+      <span>Source image: </span>
+      <input
+          (change)="encodeUploadHandler($event)"
+          [disabled]="isUploadDisabled"
+          accept="image/jpeg,image/png"
+          type="file"
+      >
+    </label>
+    <div class="result">
+      <a
+          *ngIf="isCompleteEncoded"
+          [href]="image"
+          class="link"
+          download
+      >
+        Download Encoded picture
+      </a>
+    </div>
+  </div>
+  <div class="form__field">
+    <h2 class="form__field-title">Decode</h2>
+    <label class="key">
+      <span>Key (0-255): </span>
+      <div class="key-wrap">
+        <input
+            [(ngModel)]="decodeKeys[0]"
+            type="number"
+            min="0"
+            max="255"
+        >
+        <input
+            [(ngModel)]="decodeKeys[1]"
+            type="number"
+            min="0"
+            max="255"
+        >
+        <input
+            [(ngModel)]="decodeKeys[2]"
+            type="number"
+            min="0"
+            max="255"
+        >
+      </div>
+    </label>
+    <label class="file">
+      <span>Image: </span>
+      <input
+          (change)="decodeUploadHandler($event)"
+          accept="image/jpeg,image/png"
+          type="file">
+    </label>
+    <div
+        *ngIf="isCompleteDecoded"
+        class="result">
+      <span>Decoded Message: </span>
+      <input
+          [ngModel]="decodedMessage"
+          readonly
+      />
+    </div>
+  </div>
+</div>
+<canvas
+  #canvas
+  id="canvas"
+  width="800"
+  height="600">
+</canvas>
+<p class="picture__title">Picture</p>
+<img [src]="image" alt="" class="picture">

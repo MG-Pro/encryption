@@ -11,7 +11,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import {FormsModule} from '@angular/forms';
 import { VizhenerComponent } from './components/vizhener/vizhener.component';
 import { MethodViewComponent } from './components/method-view/method-view.component';
-import { SteganographyComponent } from './components/steganography/steganography.component'
+import { SteganographyComponent } from './components/steganography/steganography.component';
+import { KjbSteganographyComponent } from './components/kjb-steganography/kjb-steganography.component'
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SteganographyComponent } from './components/steganography/steganography
     FooterComponent,
     VizhenerComponent,
     MethodViewComponent,
-    SteganographyComponent
+    SteganographyComponent,
+    KjbSteganographyComponent
   ],
   imports: [
     BrowserModule,

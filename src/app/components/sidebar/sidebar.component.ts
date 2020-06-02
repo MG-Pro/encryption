@@ -24,6 +24,10 @@ export class SidebarComponent {
       name: 'Steganography LSB',
       path: '/steganography'
     },
+    {
+      name: 'Steganography KJB',
+      path: '/kjb-steganography'
+    },
   ]
   constructor() { }
 
