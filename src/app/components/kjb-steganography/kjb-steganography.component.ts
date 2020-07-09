@@ -22,7 +22,7 @@ export class KjbSteganographyComponent {
   constructor(private codeService: KjbSteganographyService) {}
 
   ngAfterViewInit() {
-    this.codeService.init(this.canvas.nativeElement)
+    // this.codeService.init(this.canvas.nativeElement)
   }
 
   messageInputHandler() {
@@ -31,13 +31,13 @@ export class KjbSteganographyComponent {
 
   async encodeUploadHandler(e) {
     this.isCompleteEncoded = false
-    this.image = await this.codeService.encrypt(e.target.files[0], this.message, this.encodeKeys)
+    // this.image = await this.codeService.encrypt(e.target.files[0], this.message, this.encodeKeys)
     this.isCompleteEncoded = true
   }
 
   async decodeUploadHandler(e) {
     this.isCompleteDecoded = false
-    this.decodedMessage = await this.codeService.decrypt(e.target.files[0], this.decodeKeys)
+    // this.decodedMessage = await this.codeService.decrypt(e.target.files[0], this.decodeKeys)
     this.isCompleteDecoded = true
   }
 
